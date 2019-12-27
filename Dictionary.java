@@ -33,6 +33,7 @@ class Dictionary{
         try{
             
             File FileDictionary= new File("allWords.txt");
+            //File FileDictionary= new File("C:\\Users\\hijor\\IdeaProjects\\Programming\\src\\allWords.txt"); //Para o Abel
             Scanner scan = new Scanner(FileDictionary);
             
             while (scan.hasNextLine()) {
