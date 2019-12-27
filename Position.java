@@ -4,22 +4,27 @@ class Position{
     int positionX;
     int positionY;
     boolean marcado;
-    
+
     public Position(String a, int posiX,int posiY){
 
         letra = new String(a);
         positionX=posiX;
         positionY=posiY;
+        marcado=false;
     }
 
     public Position(int posiX,int posiY){
 
         this(null,posiX,posiY);
+        marcado=false;
+
     }
 
     public Position(String a){
 
         letra=a;
+        marcado=false;
+
     }
 
     public void setCoords(int posiX,int posiY){
@@ -58,15 +63,47 @@ class Position{
 
     }
 
-    public String setLetter(){
+    public String getLetter(){
 
         return letra;
 
     }
 
+    public void setMarca(){
+        marcado=true;
+    }
+
+    public void clearMarca(){
+        marcado=false;
+    }
+
     public String toString(){
 
         return "("+letra+":("+positionX+","+positionY+")"+")";
+    }
+
+    public boolean equals(Object o){
+
+        if (o == this) { 
+            return true; 
+        } 
+
+        if (!(o instanceof Position)) { 
+            return false; 
+        } 
+
+        Position a = (Position) o;
+
+        if (a.letra.equals(letra)){
+            
+            return true;
+
+        }else{
+
+            return false;
+        }
+
+
     }
 
     public static void main(String[] args) {
