@@ -1,6 +1,6 @@
 import java.util.*;
 
-class HashTable<T>{
+class HashTable<T>{  //fazer os extends dos varios tipos de solve collisions
 
     public T[] tabela;
     public T[] newTabela;

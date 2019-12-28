@@ -12,8 +12,6 @@ public void findWords(int row,int column){
 
     if ( 0 <= Matriz[row][column].getX() && Matriz[row][column].getX() < Matriz[row].length-1 && 0 <= Matriz[row][column].getY()+1 && Matriz[row][column].getY()+1 < Matriz.length-1 && Matriz[row][column].marcado==false) { 
         
-        System.out.println("ola");
-
         findWords(Matriz[row][column].getX() ,Matriz[row][column].getY()+1); //N
 
     }
@@ -64,11 +62,11 @@ public void findWords(int row,int column){
         findWords( Matriz[row][column].getX()-1 ,Matriz[row][column].getY()-1); // SW
 
     }
-    Word.remove(Word.size();
+    Word.remove(Word.size());
     Word.escrita();
 
     System.out.println(WordString);
     
-
+    //a função nao volta a trás...
 
 }

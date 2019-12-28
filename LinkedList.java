@@ -184,6 +184,56 @@ public class LinkedList<T> implements Iterable<T>{
         list = new LinkedListIterator<T>(this.header());
 
     }
+
+    public void print(){
+
+        System.out.print("[");
+        while (list.hasNext()) {
+            
+            System.out.print(list.next());
+            if (list.hasNext())
+            System.out.print(", ");
+        }
+        System.out.println("]");
+
+        list = new LinkedListIterator<T>(this.header());
+
+    }
+
+    public String toString(){
+
+        String save="";
+
+        save=save+"[";
+
+        while (list.hasNext()) {
+            
+            save=save+list.next().toString();
+            if (list.hasNext()){
+               
+                save=save+", ";
+
+            }
+        }
+        save=save+"]";
+
+        return save;
+    }
+
+    public void copyTo(LinkedList<T> novo){
+
+        novo = new LinkedList<>();
+        int count=0; 
+        
+        while (list.hasNext()) {
+            
+            novo.set(count,list.next());
+            
+        }
+
+        list = new LinkedListIterator<T>(this.header());
+
+    }
     
     public static void main(String[] args) {
         
