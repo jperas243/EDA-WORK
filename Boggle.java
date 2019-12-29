@@ -1,11 +1,13 @@
 import java.io.File;
+import java.util.Scanner; 
+import java.io.FileNotFoundException;  
 
 class Boggle{
 
     Dictionary Dictio;
     File BoggleDoc;
     Position[][] Matriz;
-    LinkedList<LinkedList<Position>> WordsFound;
+    LinkedList<String> WordsFound;
     LinkedList<Position> Word;
 
     public Boggle(){
@@ -44,23 +46,35 @@ class Boggle{
 
     public void buildMatriz(){
 
-        //adaptar para ler o ficheiro e construir, 
+        try{
+            
+            //File FileDictionary= new File("C:\\Users\\hijor\\IdeaProjects\\Programming\\src\\allWords.txt"); //Para o Abel
+            Scanner scan = new Scanner(BoggleDoc);
+            int counter=0;
+            int j=0;
 
-        int v=0;
-        int j=0;
 
-        for (int i=0;i<Matriz[j].length;i++){
+                String data = scan.nextLine();
+                
+                for (int i=0;i<Matriz[j].length;i++){
 
-            for (int z=0;z<Matriz.length;z++){
+                    for (int z=0;z<Matriz.length;z++){
+        
+                        String letra = String.valueOf(data.charAt(counter));
+                        counter++;
+                        Matriz[i][z] =  new Position(letra,i , z);
+                        System.out.print(Matriz[i][z]);
+                    }
+                    System.out.println();
 
-                Matriz[i][z] = new Position(Character.toString ((char) 65+i+z+v));
-                Matriz[i][z].setX(i);
-                Matriz[i][z].setY(z);
-                System.out.print(Matriz[i][z]+" , ");            
-            }
-            System.out.println(); 
-            v++;           
+                }
+        
+            scan.close();
 
+        }catch (FileNotFoundException e) {
+            
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
 
     }
@@ -69,10 +83,7 @@ class Boggle{
 
         buildMatriz();
 
-        int j=0;
-
-        
-        
+        int j=0;        
         
         for (int i=0;i<Matriz[j].length;i++){
 
@@ -94,19 +105,17 @@ class Boggle{
 
         if ( 0 <= row && row < Matriz[j].length && 0 <= column && column< Matriz.length && Matriz[row][column].marcado==false) { 
         
-            String WordString = Anterior.concat(Matriz[row][column].getLetter());
-            System.out.println(WordString);
-            Word.add(Matriz[row][column]);
+            String WordString = Anterior.concat(Matriz[row][column].getLetter().toLowerCase());
             Matriz[row][column].setMarca();
+            Word.add(Matriz[row][column]);
             
             if (Dictio.wordExists(WordString)){
 
-                LinkedList<Position> novo= new LinkedList<>(); 
-                Word.copyTo(novo);
+                String novo = listToString(Word); 
                 WordsFound.add(novo);
             }
 
-            findWords(Matriz[row][column].getX() ,Matriz[row][column].getY()+1,WordString);
+            findWords( Matriz[row][column].getX() ,Matriz[row][column].getY()+1,WordString);
             findWords( Matriz[row][column].getX() ,Matriz[row][column].getY()-1,WordString); //S
             findWords( Matriz[row][column].getX()+1 ,Matriz[row][column].getY(),WordString); //E
             findWords( Matriz[row][column].getX()-1,Matriz[row][column].getY(),WordString); //W
@@ -116,8 +125,10 @@ class Boggle{
             findWords( Matriz[row][column].getX()+1 ,Matriz[row][column].getY()-1,WordString); // SE
             findWords( Matriz[row][column].getX()-1 ,Matriz[row][column].getY()-1,WordString); // SW
 
-            Word.remove(Word.size()-1);
+            Word.remove(Matriz[row][column]);
             Matriz[row][column].clearMarca();
+            System.out.println(WordString);
+
 
             return WordString;
     
@@ -140,6 +151,21 @@ class Boggle{
         }
     }
 
+        /*
+
+            [seldom, semen, seoul, so, soul, soon, some, sum, sumo, summon, 
+            sum, sumo, sumo, sue, sue, suet, elm, em, emu, emus, lot, lumen, 
+            lumen, do, dome, dome, domes, dot, dote, doe, dole, doles, dolmen, 
+            omen, ominous, us, use, mod, mold, mole, moles, mu, mum, mule,
+            mules, muse, me, met, memo, memo, men, me, meld, omen, old, ole,
+            olm, omen, oink, on, one, me, met, memo, men, moo, moos, moose, 
+            monk, monkey, money, mould, mouse, mu, mum, mule, mules, muse, mink, 
+            minke, mine, mould, mouse, moo, moon, em, emu, emus, em, emu, emus, 
+            ten, tyke, to, tome, tome, tomes, toe, told, in, ink, inky, ion, 
+            im, ne, net, no, noose, key, ken, ye, yet, yen]
+
+        */
+
 
     public String listToString(LinkedList<Position> word){
 
@@ -158,9 +184,9 @@ class Boggle{
 
     public static void main(String[] args) {
         
-        Boggle Analise = new Boggle();
+        Boggle Analise = new Boggle("Boggle.txt");
         Analise.newMatriz(4, 4);
-        Analise.buildMatriz();
+        Analise.solve();
         Analise.solution();
     }
 }

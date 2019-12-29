@@ -56,7 +56,7 @@ class Dictionary{
     public static void main(String[] args) {
     
         Dictionary livro = new Dictionary();
-        System.out.println(livro.wordExists("game"));
+        System.out.println(livro.wordExists("seldom"));
         
     }
 

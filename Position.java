@@ -94,7 +94,7 @@ class Position{
 
         Position a = (Position) o;
 
-        if (a.letra.equals(letra)){
+        if (a.letra.equals(letra) && positionX == a.getX() && positionY == a.getY()  ){
             
             return true;
 
@@ -112,4 +112,8 @@ class Position{
         System.out.println(posi.toString());
 
     }
+
+
+
+
 }
