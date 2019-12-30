@@ -102,8 +102,6 @@ class HashTable<T>{  //fazer os extends dos varios tipos de solve collisions
     
             }
         } 
-
-        System.out.println(result);
         
         return result;
         
@@ -205,15 +203,13 @@ class HashTable<T>{  //fazer os extends dos varios tipos de solve collisions
         for (int i = size; i < 2.5*size; i++) {
             boolean isPrimeNumber = true;
 
-            // check to see if the number is prime
             for (int j = 2; j < i; j++) {
                 if (i % j == 0) {
                     isPrimeNumber = false;
-                    break; // exit the inner for loop
+                    break; 
                 }
             }
 
-            // print the number if prime
             if (isPrimeNumber) {
                 primes.add(i);
             }

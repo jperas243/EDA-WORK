@@ -109,6 +109,8 @@ public class LinkedList<T> implements Iterable<T>{
         list = new LinkedListIterator<T>(this.header());
 
     } 
+
+    
     
     public SingleNode<T> remove(T x){            
 
@@ -134,6 +136,7 @@ public class LinkedList<T> implements Iterable<T>{
 
         list = new LinkedListIterator<T>(this.header());
 
+        size--;
         return Atual;
     
        
@@ -160,30 +163,16 @@ public class LinkedList<T> implements Iterable<T>{
 
         SingleNode<T> Atual =new SingleNode<T>();
         
-        size--;
         for (int z=0;z<=ind;z++){      
             list.next();
             Atual=list.NodeAtual;
         }
         list.remove();
         list = new LinkedListIterator<T>(this.header());
+        size--;
 
     }   
 
-    public void escrita(){
-
-        System.out.print("[");
-        while (list.hasNext()) {
-            
-            System.out.print(list.next());
-            if (list.hasNext())
-            System.out.print(", ");
-        }
-        System.out.println("]");
-
-        list = new LinkedListIterator<T>(this.header());
-
-    }
 
     public void print(){
 
@@ -220,20 +209,6 @@ public class LinkedList<T> implements Iterable<T>{
         return save;
     }
 
-    public void copyTo(LinkedList<T> novo){
-
-        novo = new LinkedList<>();
-        int count=0; 
-        
-        while (list.hasNext()) {
-            
-            novo.set(count,list.next());
-            
-        }
-
-        list = new LinkedListIterator<T>(this.header());
-
-    }
     
     public static void main(String[] args) {
         
@@ -245,7 +220,12 @@ public class LinkedList<T> implements Iterable<T>{
 
         lista.add(new Integer(5));
 
-        lista.escrita();
+        lista.remove(2);
+
+
+        lista.print();
+
+        
 
 
     }

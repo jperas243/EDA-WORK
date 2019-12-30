@@ -41,7 +41,7 @@ public class  LinkedListIterator<E> implements java.util.Iterator<E> {
         SingleNode<E> save = NodePrev;
         this.next();
         NodePrev=save;
-        NodePrev.setNext(NodeAtual);
+        NodePrev.setNext(NodeAtual.getNext());
     } 
     
 }

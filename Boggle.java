@@ -7,7 +7,7 @@ class Boggle{
     Dictionary Dictio;
     File BoggleDoc;
     Position[][] Matriz;
-    LinkedList<String> WordsFound;
+    LinkedList<LinkedList<Position>> WordsFound;
     LinkedList<Position> Word;
 
     public Boggle(){
@@ -81,7 +81,9 @@ class Boggle{
     
     public void solve(){
 
+        System.out.println("---------------------");
         buildMatriz();
+        System.out.println("---------------------");
 
         int j=0;        
         
@@ -89,15 +91,13 @@ class Boggle{
 
             for (int z=0;z<Matriz.length;z++){
 
-                System.out.println("--------------------------");
                 findWords(i,z,"");
-                System.out.println("--------------------------");
             }
 
         }
     }
 
-    public String findWords(int row,int column,String Anterior){    
+    public void findWords(int row,int column,String Anterior){    
 
         //recursividade esta bem,porem nao sabemos se WordsFound anota as encontradas
         
@@ -106,37 +106,51 @@ class Boggle{
         if ( 0 <= row && row < Matriz[j].length && 0 <= column && column< Matriz.length && Matriz[row][column].marcado==false) { 
         
             String WordString = Anterior.concat(Matriz[row][column].getLetter().toLowerCase());
+            
+            Position novoPosition = Matriz[row][column];
+            Word.add(novoPosition);
             Matriz[row][column].setMarca();
-            Word.add(Matriz[row][column]);
             
             if (Dictio.wordExists(WordString)){
 
-                String novo = listToString(Word); 
+                LinkedList<Position> novo = new LinkedList<>();
+                
+                for(int i=0;i<Word.size();i++){
+
+                    Position newPosition = Word.get(i);
+                    novo.add(newPosition);
+
+                }
                 WordsFound.add(novo);
             }
 
+
+
             findWords( Matriz[row][column].getX() ,Matriz[row][column].getY()+1,WordString);
+
+
             findWords( Matriz[row][column].getX() ,Matriz[row][column].getY()-1,WordString); //S
+
             findWords( Matriz[row][column].getX()+1 ,Matriz[row][column].getY(),WordString); //E
+
             findWords( Matriz[row][column].getX()-1,Matriz[row][column].getY(),WordString); //W
             
             findWords( Matriz[row][column].getX()+1 ,Matriz[row][column].getY()+1,WordString); // NE
+
             findWords( Matriz[row][column].getX()-1 ,Matriz[row][column].getY()+1,WordString); // NW
-            findWords( Matriz[row][column].getX()+1 ,Matriz[row][column].getY()-1,WordString); // SE
+
+            findWords( Matriz[row][column].getX()+1 ,Matriz[row][column].getY()-1,WordString); 
+
             findWords( Matriz[row][column].getX()-1 ,Matriz[row][column].getY()-1,WordString); // SW
 
-            Word.remove(Matriz[row][column]);
+            Word.remove(Word.size-1);
             Matriz[row][column].clearMarca();
-            System.out.println(WordString);
 
 
-            return WordString;
-    
-        }else{
-
-            return Anterior;
 
         }
+    
+
 
     
 
@@ -145,9 +159,18 @@ class Boggle{
     public void solution(){
         
         if (WordsFound==null){
+            
             System.out.println("Execute solve() primeiro");
+        
         }else{ 
-            WordsFound.print();
+            
+            for(int i=0;i<WordsFound.size();i++){
+
+                System.out.print(WordsFound.get(i));
+                System.out.println();
+
+            }
+
         }
     }
 
@@ -188,5 +211,9 @@ class Boggle{
         Analise.newMatriz(4, 4);
         Analise.solve();
         Analise.solution();
+
+
+    
+
     }
 }

@@ -24,6 +24,11 @@ public class SingleNode<T>{
 
     }
 
+    public String toString(){
+
+        return Node.toString();
+    }
+
     
     
     public T element(){         

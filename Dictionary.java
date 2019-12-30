@@ -40,7 +40,6 @@ class Dictionary{
 
                 String data = scan.nextLine();
                 words.insere(data);
-                System.out.println(words.procurar(data));
         
             }
             scan.close();
