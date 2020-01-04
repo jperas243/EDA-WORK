@@ -207,7 +207,7 @@ class Boggle{
 
     public static void main(String[] args) {
 
-        //File FileDictionary= new File("C:\\Users\\hijor\\IdeaProjects\\Programming\\src\\Boggle.txt"); //Para o Abel
+        //Boggle Analise = new Boggle("C:\\Users\\hijor\\IdeaProjects\\Programming\\src\\Boggle.txt"); //Para o Abel
         Boggle Analise = new Boggle("Boggle.txt");
         Analise.newMatriz(4, 4);
         Analise.solve();
