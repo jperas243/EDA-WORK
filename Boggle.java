@@ -1,6 +1,6 @@
 import java.io.File;
-import java.util.Scanner; 
-import java.io.FileNotFoundException;  
+import java.util.Scanner;
+import java.io.FileNotFoundException;
 
 class Boggle{
 
@@ -37,56 +37,59 @@ class Boggle{
 
     }
 
+    public void read_boggle(String file){
+        BoggleDoc = new File(file);
+    }
+
     public void newMatriz(int row,int column ){
 
         Matriz = new Position[row][column];
     }
 
-    
+
 
     public void buildMatriz(){
 
         try{
-            
-            //File FileDictionary= new File("C:\\Users\\hijor\\IdeaProjects\\Programming\\src\\allWords.txt"); //Para o Abel
+
             Scanner scan = new Scanner(BoggleDoc);
             int counter=0;
             int j=0;
 
 
-                String data = scan.nextLine();
-                
-                for (int i=0;i<Matriz[j].length;i++){
+            String data = scan.nextLine();
 
-                    for (int z=0;z<Matriz.length;z++){
-        
-                        String letra = String.valueOf(data.charAt(counter));
-                        counter++;
-                        Matriz[i][z] =  new Position(letra,i , z);
-                        System.out.print(Matriz[i][z]);
-                    }
-                    System.out.println();
+            for (int i=0;i<Matriz[j].length;i++){
 
+                for (int z=0;z<Matriz.length;z++){
+
+                    String letra = String.valueOf(data.charAt(counter));
+                    counter++;
+                    Matriz[i][z] =  new Position(letra,i , z);
+                    System.out.print(Matriz[i][z]);
                 }
-        
+                System.out.println();
+
+            }
+
             scan.close();
 
         }catch (FileNotFoundException e) {
-            
+
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
 
     }
-    
+
     public void solve(){
 
         System.out.println("---------------------");
         buildMatriz();
         System.out.println("---------------------");
 
-        int j=0;        
-        
+        int j=0;
+
         for (int i=0;i<Matriz[j].length;i++){
 
             for (int z=0;z<Matriz.length;z++){
@@ -97,24 +100,24 @@ class Boggle{
         }
     }
 
-    public void findWords(int row,int column,String Anterior){    
+    public void findWords(int row,int column,String Anterior){
 
         //recursividade esta bem,porem nao sabemos se WordsFound anota as encontradas
-        
+
         int j=0;
 
-        if ( 0 <= row && row < Matriz[j].length && 0 <= column && column< Matriz.length && Matriz[row][column].marcado==false) { 
-        
+        if ( 0 <= row && row < Matriz[j].length && 0 <= column && column< Matriz.length && Matriz[row][column].marcado==false) {
+
             String WordString = Anterior.concat(Matriz[row][column].getLetter().toLowerCase());
-            
+
             Position novoPosition = Matriz[row][column];
             Word.add(novoPosition);
             Matriz[row][column].setMarca();
-            
+
             if (Dictio.wordExists(WordString)){
 
                 LinkedList<Position> novo = new LinkedList<>();
-                
+
                 for(int i=0;i<Word.size();i++){
 
                     Position newPosition = Word.get(i);
@@ -134,12 +137,12 @@ class Boggle{
             findWords( Matriz[row][column].getX()+1 ,Matriz[row][column].getY(),WordString); //E
 
             findWords( Matriz[row][column].getX()-1,Matriz[row][column].getY(),WordString); //W
-            
+
             findWords( Matriz[row][column].getX()+1 ,Matriz[row][column].getY()+1,WordString); // NE
 
             findWords( Matriz[row][column].getX()-1 ,Matriz[row][column].getY()+1,WordString); // NW
 
-            findWords( Matriz[row][column].getX()+1 ,Matriz[row][column].getY()-1,WordString); 
+            findWords( Matriz[row][column].getX()+1 ,Matriz[row][column].getY()-1,WordString);
 
             findWords( Matriz[row][column].getX()-1 ,Matriz[row][column].getY()-1,WordString); // SW
 
@@ -149,21 +152,21 @@ class Boggle{
 
 
         }
-    
 
 
-    
+
+
 
     }
 
     public void solution(){
-        
+
         if (WordsFound==null){
-            
+
             System.out.println("Execute solve() primeiro");
-        
-        }else{ 
-            
+
+        }else{
+
             for(int i=0;i<WordsFound.size();i++){
 
                 System.out.print(WordsFound.get(i));
@@ -176,15 +179,15 @@ class Boggle{
 
         /*
 
-            [seldom, semen, seoul, so, soul, soon, some, sum, sumo, summon, 
-            sum, sumo, sumo, sue, sue, suet, elm, em, emu, emus, lot, lumen, 
-            lumen, do, dome, dome, domes, dot, dote, doe, dole, doles, dolmen, 
+            [seldom, semen, seoul, so, soul, soon, some, sum, sumo, summon,
+            sum, sumo, sumo, sue, sue, suet, elm, em, emu, emus, lot, lumen,
+            lumen, do, dome, dome, domes, dot, dote, doe, dole, doles, dolmen,
             omen, ominous, us, use, mod, mold, mole, moles, mu, mum, mule,
             mules, muse, me, met, memo, memo, men, me, meld, omen, old, ole,
-            olm, omen, oink, on, one, me, met, memo, men, moo, moos, moose, 
-            monk, monkey, money, mould, mouse, mu, mum, mule, mules, muse, mink, 
-            minke, mine, mould, mouse, moo, moon, em, emu, emus, em, emu, emus, 
-            ten, tyke, to, tome, tome, tomes, toe, told, in, ink, inky, ion, 
+            olm, omen, oink, on, one, me, met, memo, men, moo, moos, moose,
+            monk, monkey, money, mould, mouse, mu, mum, mule, mules, muse, mink,
+            minke, mine, mould, mouse, moo, moon, em, emu, emus, em, emu, emus,
+            ten, tyke, to, tome, tome, tomes, toe, told, in, ink, inky, ion,
             im, ne, net, no, noose, key, ken, ye, yet, yen]
 
         */
@@ -193,13 +196,13 @@ class Boggle{
     public String listToString(LinkedList<Position> word){
 
         String save = new String("");
-            
+
         for(int i=0;i<word.size();i++){
 
             save=save+word.get(i).getLetter();
 
         }
-        
+
         return save;
 
     }
@@ -208,13 +211,16 @@ class Boggle{
     public static void main(String[] args) {
 
         //Boggle Analise = new Boggle("C:\\Users\\hijor\\IdeaProjects\\Programming\\src\\Boggle.txt"); //Para o Abel
-        Boggle Analise = new Boggle("Boggle.txt");
+        //Boggle Analise = new Boggle("Boggle.txt");
+        Boggle Analise = new Boggle();
+        //Analise.read_boggle("C:\\Users\\hijor\\IdeaProjects\\Programming\\src\\Boggle.txt"); //Insert path here
+        Analise.read_boggle("Boggle.txt");
         Analise.newMatriz(4, 4);
         Analise.solve();
         Analise.solution();
 
 
-    
+
 
     }
 }
