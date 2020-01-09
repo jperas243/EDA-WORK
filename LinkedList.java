@@ -181,7 +181,7 @@ public class LinkedList<T> implements Iterable<T>{
             
             System.out.print(list.next());
             if (list.hasNext())
-            System.out.print(", ");
+            System.out.print(" ==> ");
         }
         System.out.println("]");
 

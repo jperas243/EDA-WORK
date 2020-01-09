@@ -42,7 +42,17 @@ class Boggle{
         Matriz = new Position[row][column];
     }
 
-    
+    public void setFile(String a){
+
+        BoggleDoc = new File(a);
+
+    }
+
+    public File getFile(){
+
+        return BoggleDoc;
+
+    }
 
     public void buildMatriz(){
 
@@ -166,7 +176,7 @@ class Boggle{
             
             for(int i=0;i<WordsFound.size();i++){
 
-                System.out.print(WordsFound.get(i));
+                WordsFound.get(i).print();
                 System.out.println();
 
             }
