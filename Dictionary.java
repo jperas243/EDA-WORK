@@ -8,7 +8,7 @@ class Dictionary{
 
     public Dictionary(){
 
-        words = new HashTable<>(60000);
+        words = new HashTable<>(60001);
         build();
 
     }
@@ -30,6 +30,9 @@ class Dictionary{
 
     public void build(){
 
+        System.out.println("------Building Dictonary------");
+
+        
         try{
             
             File FileDictionary= new File("allWords.txt");

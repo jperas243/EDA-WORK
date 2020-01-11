@@ -46,7 +46,6 @@ class Boggle{
         Matriz = new Position[row][column];
     }
 
-<<<<<<< HEAD
     public void setFile(String a){
 
         BoggleDoc = new File(a);
@@ -58,11 +57,10 @@ class Boggle{
         return BoggleDoc;
 
     }
-=======
-
->>>>>>> 5687ee2819a69d84fe1ad1a3fabc513813969d21
 
     public void buildMatriz(){
+
+        System.out.println("------Building Matriz------");
 
         try{
 
@@ -80,9 +78,8 @@ class Boggle{
                     String letra = String.valueOf(data.charAt(counter));
                     counter++;
                     Matriz[i][z] =  new Position(letra,i , z);
-                    System.out.print(Matriz[i][z]);
                 }
-                System.out.println();
+
 
             }
 
@@ -98,9 +95,10 @@ class Boggle{
 
     public void solve(){
 
-        System.out.println("---------------------");
+
         buildMatriz();
-        System.out.println("---------------------");
+        System.out.println("------Solving Matriz------");
+
 
         int j=0;
 
@@ -181,6 +179,7 @@ class Boggle{
 
         }else{
 
+            System.out.println("\nSolution:\n");
             for(int i=0;i<WordsFound.size();i++){
 
                 WordsFound.get(i).print();
@@ -191,7 +190,18 @@ class Boggle{
         }
     }
 
-        /*
+    public static void main(String[] args) {
+
+        //Boggle Analise = new Boggle("C:\\Users\\hijor\\IdeaProjects\\Programming\\src\\Boggle.txt"); //Para o Abel
+        //Boggle Analise = new Boggle("Boggle.txt");
+        Boggle Analise = new Boggle();
+        //Analise.read_boggle("C:\\Users\\hijor\\IdeaProjects\\Programming\\src\\Boggle.txt"); //Insert path here
+        Analise.read_boggle("Boggle.txt");
+        Analise.newMatriz(4, 4);
+        Analise.solve();
+        Analise.solution();
+
+        /*  soluçao do boogle do enunciado (imagem)
 
             [seldom, semen, seoul, so, soul, soon, some, sum, sumo, summon,
             sum, sumo, sumo, sue, sue, suet, elm, em, emu, emus, lot, lumen,
@@ -205,35 +215,6 @@ class Boggle{
             im, ne, net, no, noose, key, ken, ye, yet, yen]
 
         */
-
-
-    public String listToString(LinkedList<Position> word){
-
-        String save = new String("");
-
-        for(int i=0;i<word.size();i++){
-
-            save=save+word.get(i).getLetter();
-
-        }
-
-        return save;
-
-    }
-
-
-    public static void main(String[] args) {
-
-        //Boggle Analise = new Boggle("C:\\Users\\hijor\\IdeaProjects\\Programming\\src\\Boggle.txt"); //Para o Abel
-        //Boggle Analise = new Boggle("Boggle.txt");
-        Boggle Analise = new Boggle();
-        //Analise.read_boggle("C:\\Users\\hijor\\IdeaProjects\\Programming\\src\\Boggle.txt"); //Insert path here
-        Analise.read_boggle("Boggle.txt");
-        Analise.newMatriz(4, 4);
-        Analise.solve();
-        Analise.solution();
-
-
 
 
     }

@@ -6,6 +6,8 @@ class HashTable<T>{  //fazer os extends dos varios tipos de solve collisions
     public T[] newTabela;
     int size;
     int newSize;
+    int ocupados;
+    int newOcupados;
 
     public int size(){
 
@@ -14,7 +16,9 @@ class HashTable<T>{  //fazer os extends dos varios tipos de solve collisions
 
     
     public HashTable(int num){
-
+        
+        ocupados=0;
+        newOcupados=0;
         size=num;
         tabela = (T[])new Object[num];
     }
@@ -38,7 +42,7 @@ class HashTable<T>{  //fazer os extends dos varios tipos de solve collisions
 
     public float factorCarga(){
 
-        float result=(float)ocupados()/size;
+        float result=(float)ocupados/size;
 
         return result;
 
@@ -160,6 +164,7 @@ class HashTable<T>{  //fazer os extends dos varios tipos de solve collisions
 
         int Hash=procPos(x);
         tabela[Hash]=x;
+        ocupados++;
 
         if(factorCarga()>0.6){
             rehash();
@@ -172,9 +177,10 @@ class HashTable<T>{  //fazer os extends dos varios tipos de solve collisions
         if(x==null){
 
         }else{
-
             int Hash=NewProcPos(x);
             newTabela[Hash]=x;
+            newOcupados++;
+
         }
 
     }
@@ -196,7 +202,7 @@ class HashTable<T>{  //fazer os extends dos varios tipos de solve collisions
 
     public void rehash(){
 
-        System.out.println("rehashing");
+        System.out.println("------Reashing Hastable------");
 
         List<Integer> primes = new ArrayList<>();
 
@@ -229,6 +235,7 @@ class HashTable<T>{  //fazer os extends dos varios tipos de solve collisions
         newTabela=null;
         size=newSize;
         newSize=0;
+        ocupados=newOcupados;
 
     }
     
